@@ -1,0 +1,36 @@
+{
+  "name": "projectfeature",
+  "version": "1.0.0",
+  "description": "projectfeature Node Microservice",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "ng test",
+    "build": "tsc",
+    "dev": "ts-node ./src/server.ts",
+    "start": "nodemon ./dist/server.js",
+    "prod": "npm run build && npm run start"
+  },
+  "author": "Geppetto <gepinfo@geppettosoftware.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.16.1",
+    "async": "^3.2.0",
+    "aws-sdk": "^2.776.0",
+    "body-parser": "^1.18.3",
+    "busboy": "^0.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "express-winston": "^3.0.1",
+    "fs": "0.0.1-security",
+    "node-async-loop": "^1.2.2",
+    "mongoose": "~5.4.7",
+    "nodemon": "^1.18.9",
+    "ts-node": "^9.0.0",
+    "typescript": "^3.3.1",
+    "util": "^0.11.1",
+    "uuidv4": "^6.2.4",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.6.0"
+  }
+}

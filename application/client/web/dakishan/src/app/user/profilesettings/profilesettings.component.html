@@ -1,0 +1,59 @@
+<div class="profileform">
+    <form>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="label"><strong>First Name</strong></label>
+                    <input type="text" class="form-control" placeholder="Firstname" [(ngModel)]='data' name="firstname">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="label"><strong>Last Name</strong></label>
+                    <input type="text" class="form-control" placeholder="Lastname" [(ngModel)]='datas' name="lastname">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="label"><strong>User Name</strong></label>
+                    <input type="text" class="form-control" [disabled]="true" placeholder="Username" [(ngModel)]='Userobject.username' name="username">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="label"><strong>Password</strong></label>
+                    <input type="text" readonly class="form-control" placeholder="Password" [(ngModel)]='Userobject.password' name="password">
+                </div>
+            </div> -->
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="label"><strong>Email</strong></label>
+                    <input type="email" class="form-control" placeholder="Email" [(ngModel)]='value' name="email">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="label"><strong>Profile Pic</strong></label>
+                    <input type="image" type="file" class="form-control" placeholder="Photo" name="avatar" (change)="onFileSelected($event)" accept="image/png, image/gif, image/jpeg">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="label"><strong>Role</strong></label>
+                    <select class="form-select" (change)="onChange($event)"> 
+                    <option selected>select options</option>
+                      <option *ngFor="let rolevalue of roles">{{rolevalue.role}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary" (click)="Updateuser()">Save</button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary" (click)="cancle()">cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,226 @@
+openapi: 3.0.0
+info:
+  version: 1.3.0
+  title: ProjectMonk User api specification
+  description: ProjectMonk API
+  termsOfService: 'http://api_url/terms/'
+  contact:
+    name: ContactName
+    email: hello@wolox.co
+    url: 'https://www.wolox.com.ar/'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:8015'
+    description: PM_User
+tags:
+  - name: ProjectMonk
+    description: User Service
+paths:
+  /signup:
+    post:
+      tags:
+        - User
+      description: PMCreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /login:
+    post:
+      tags:
+        - User
+      description: PMLoginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUser'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /logout:
+    post:
+      tags:
+        - User
+      description: PMUserLogout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogoutUser'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /updateuser:
+    put:
+      tags:
+        - User
+      description: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  "/getallusers":
+      get:
+         tags:
+         -  User
+         description: GetAllUsers
+         responses:
+            200:
+               description: Success
+            400:
+               description: Bad Request
+            404:
+               description: Not Found
+            500:
+               description: Internal Server Error
+  "/getuser/{id}":
+      get:
+         tags:
+         -  User
+         description: GetUserById
+         parameters:
+         -  in: "path"
+            description: GetUserById
+            name: id
+            required: true
+            schema:
+               type: "string"
+         responses:
+            200:
+               description: Success
+            400:
+               description: Bad Request
+            404:
+               description: Not Found
+            500:
+               description: Internal Server Error
+  "/deleteuser/{id}":
+      get:
+         tags:
+         -  User
+         description: DeleteUser
+         parameters:
+         -  in: "path"
+            description: DeleteUser
+            name: id
+            required: true
+            schema:
+               type: "string"
+         responses:
+            200:
+               description: Success
+            400:
+               description: Bad Request
+            404:
+               description: Not Found
+            500:
+               description: Internal Server Error
+components:
+  schemas:
+    CreateUser:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Description
+        password:
+          type: string
+          description: Description
+        name:
+          type: string
+          description: Description
+        dob:
+          type: string
+          description: Description
+        doj:
+          type: string
+          description: Description
+        projectid:
+          type: number
+          description: Description
+        teamid:
+          type: string
+          description: Description
+        organization:
+          type: string
+          description: Description
+    LoginUser:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Description
+        password:
+          type: string
+          description: Description
+    LogoutUser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Description
+    UpdateUser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Description
+        email:
+          type: string
+          description: Description
+        password:
+          type: string
+          description: Description
+        name:
+          type: string
+          description: Description
+        dob:
+          type: string
+          description: Description
+        doj:
+          type: string
+          description: Description
+        projectid:
+          type: number
+          description: Description
+        teamid:
+          type: string
+          description: Description
+        organization:
+          type: string
+          description: Description

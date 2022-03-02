@@ -1,0 +1,79 @@
+<h2 class="screen-align">UpdateAuthorization</h2>
+<section id="iwlt8m" class="gpd-section">
+    <div id="igo4ib" class="gpd-container gpd-cnt">
+        <div id="iqmej" class="gdp-row gpd-grid">
+            <div id="iezck" class="cell gpd-clm"></div>
+            <div id="ivnf7" class="cell gpd-clm">
+                <div id="ivljx" class="gdp-row gpd-grid">
+                    <div id="iv733j" class="cell gpd-clm">
+                        <div id="ifznli" class="gdp-row gpd-grid">
+                            <div id="i4eiqh" class="cell gpd-clm">
+                                <div id="ibo3a4" class="gdp-row gpd-grid">
+                                    <div id="ird38h" class="cell gpd-clm">
+                                        <div id="icdscp" class="gdp-row gpd-grid">
+                                            <div id="i1bkl9" class="cell gpd-clm">
+                                                <div id="iwawdc" class="form-group"><label for="frmg-4m80ob8qlq" id="ibmaqq">Screen_name</label>
+                                                    <input type="text" placeholder="Update the Catalog name" id="i8lq9q" [(ngModel)]="resources.resource_name" [ngModelOptions]="{standalone: true}" class="form-control" disabled/></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="ilcveb" class="cell gpd-clm">
+                                        <div id="i3rvnb" class="gdp-row gpd-grid">
+                                            <div id="ik8vzb" class="cell gpd-clm">
+                                                <div id="irny2o" class="form-group">
+                                                    <label for="frmg-4m80ob8qlq" id="ikn08t">Roles</label>
+                                                    <!-- <input type="text" placeholder="Update the Description" id="inr5ra" [(ngModel)]="ItemTags.description" [ngModelOptions]="{standalone: true}" class="form-control" /> -->
+                                                    <ng-select [items]="roles" bindLabel="role" placeholder="Select Category" appendTo="body" [multiple]="true" [(ngModel)]="selected">
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- <div class="card p-4 mt-5" style="  background-color: #fff;"> -->
+            <!-- <ngx-spinner bdColor="rgba(231,220,220,0.33)" size="small" color="#b2acac" [fullScreen]="true">
+              <img class="loading-image" src='./assets/images/loading-animation.gif' />
+          </ngx-spinner> -->
+            <!-- <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <button class="btn" id="Add_row" color="primary" (click)="AddRows()">Add Row</button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+
+                    </div>
+                </div> -->
+            <!-- <div class="row">
+                  <div class="col-lg-12">
+                      <h2 *ngIf="error_status" id="error_msg">Please enter the valid one in Name Field</h2>
+                      <h2 *ngIf="reserved_error_status" id="error_msg">Please Don't use the reserved word of<u>{{EnteredReserveWord}}</u></h2>
+                  </div>
+              </div> -->
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                    <ag-grid-angular #agGrid style="width: auto; height: auto;" id="myGrid" class="ag-theme-alpine-dark" [columnDefs]="columnDefs" [rowData]="rowData" [defaultColDef]="defaultColDef" [animateRows]="false" (gridReady)="onGridReady($event)" domLayout='autoHeight'
+                        [frameworkComponents]="frameworkComponents" (cellValueChanged)="onCellValueChanged($event)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+
+        <div class="gdp-row gpd-grid" id="izs79k">
+            <div class="cell gpd-clm" id="i69mq3">
+                <div id="ioh83n" class="gdp-row gpd-grid">
+                    <div id="ievgxl" class="cell gpd-clm"><button type="button" id="i6nkfw" class="btn btn-primary" (click)="GpUpdate()">Update</button></div>
+                    <div id="ievgxl" class="cell gpd-clm"><button type="button" id="cancel" class="btn btn-primary" [routerLink]="['/home']">Cancel</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,95 @@
+<h2 class="screen-align">Authorization</h2>
+<section id="iwlt8m" class="gpd-section">
+    <div id="igo4ib" class="gpd-container gpd-cnt">
+        <!-- <div id="iqmej" class="gdp-row gpd-grid">
+            <div id="iezck" class="cell gpd-clm"></div>
+            <div id="ivnf7" class="cell gpd-clm">
+                <div id="ivljx" class="gdp-row gpd-grid">
+                    <div id="iv733j" class="cell gpd-clm">
+                        <div id="ifznli" class="gdp-row gpd-grid">
+                            <div id="i4eiqh" class="cell gpd-clm">
+                                <div id="ibo3a4" class="gdp-row gpd-grid">
+                                    <div id="ird38h" class="cell gpd-clm">
+                                        <div id="icdscp" class="gdp-row gpd-grid">
+                                            <div id="i1bkl9" class="cell gpd-clm">
+                                                <div id="iwawdc" class="form-group"><label for="frmg-4m80ob8qlq" id="ibmaqq">Screen_Name</label>
+                                                    <input type="text" placeholder="Enter the screen name" id="i8lq9q" [(ngModel)]="resources.resource_name" [ngModelOptions]="{standalone: true}" class="form-control" /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="ilcveb" class="cell gpd-clm">
+                                        <div id="i3rvnb" class="gdp-row gpd-grid">
+                                            <div id="ik8vzb" class="cell gpd-clm">
+                                                <div id="irny2o" class="form-group"><label for="frmg-4m80ob8qlq" id="ikn08t">Roles</label>
+                                                    <ng-select [items]="roles" bindLabel="role" placeholder="Select Category" appendTo="body" [multiple]="true" [(ngModel)]="selected">
+                                                    </ng-select>
+                                                    <label style="font-size: small; color: red;">* Check on Access of Roles like admin, user, guest, developer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="container">
+            <div class="card p-4 mt-5" style="  background-color: #fff;">
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <button class="btn" id="Add_row" color="primary" (click)="AddRows()">Add Row</button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-alpine" [columnDefs]="columnDefs" [rowData]="rowData" [defaultColDef]="defaultColDef" [animateRows]="false" (gridReady)="onGridReady($event)" domLayout='autoHeight'
+                            [frameworkComponents]="frameworkComponents" (cellValueChanged)="onCellValueChanged($event)"></ag-grid-angular>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div name="grid_template-i6lz" id="getallvalues">
+            <div class="tableBg">
+                <table id="table" class="table table-bordered  table-striped table-curved" data-show-header="true" data-pagination="true" data-id-field="name">
+                    <thead class="table table-hover">
+                        <tr>
+                            <th *ngFor="let column of colDefs">{{column.headerName}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-design" *ngIf="getAllRowData.length>0">
+                        <tr (click)="onSelectionChanged(values)" *ngFor="let values of getAllRowData | slice: (page-1) * paginationPageSize :(page-1) * paginationPageSize + paginationPageSize; let i=index">
+                            <td>{{ values.resource_name }}</td>
+                            <td>{{ values.roles }}</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="table-design" *ngIf="getAllRowData.length==0">
+                        <td style="text-align: center;" colspan="5">No Data Found</td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bottomPage">
+                <div class="text-right">
+                    <ngb-pagination class="d-flex justify-content-start" [(page)]="page" [maxSize]="5" [rotate]="true" [pageSize]="paginationPageSize" [collectionSize]="getAllRowData.length" [boundaryLinks]="true"></ngb-pagination>
+                </div>
+            </div>
+            <div id="myGrid" class=""></div>
+        </div> -->
+        <ag-grid-angular #agGrid style="width: auto; height: 550px;" id="myGrid" class="ag-theme-alpine-dark" [columnDefs]="colDefs" [rowData]="getAllRowData" [gridOptions]="gridOptions" [animateRows]="false" (gridReady)="onGridReady($event)" domLayout='autoHeight'
+            (rowClicked)="onRowClick($event)" [frameworkComponents]="frameworkComponents"></ag-grid-angular>
+        <!-- <div class="gdp-row gpd-grid" id="izs79k">
+            <div class="cell gpd-clm" id="i69mq3">
+                <div id="ioh83n" class="gdp-row gpd-grid">
+                    <div id="ievgxl" class="cell gpd-clm"><button type="button" id="i6nkfw" class="btn btn-primary" (click)="GpCreate()">Create</button></div>
+                    <div id="ievgxl" class="cell gpd-clm"><button type="button" id="cancel" class="btn btn-primary" [routerLink]="['/home']">Cancel</button></div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</section>

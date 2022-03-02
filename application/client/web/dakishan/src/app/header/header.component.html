@@ -1,0 +1,140 @@
+<nav id="template-i090p" class="">
+    <div id="i9d5" class="gpd-navbar">
+        <div id="ihgh" class="gpd-container gpd-cnt">
+            <div id="ighf" class="gdp-row gpd-grid sticky">
+                <div id="ik48" class="cell gpd-clm">
+                    <div id="ij0o8m" class="gdp-row gpd-grid">
+<span onclick="openNav()" id="template-i2uji" class="">
+<div id="i8h3sg" class="cell gpd-clm">
+<img id="igjp1x" src="https://cdn.grapedrop.com/uf9ef8595751c4d1f87c91168f5d51a8c/8762113d99a84fa5baf2345306d4f0c3_hamburger3.png" class=""/>
+</div>
+</span>
+
+                        <div id="ip9j7w" class="cell gpd-clm">
+                            <img id="i4dr2" src="https://cdn.grapedrop.com/uf9ef8595751c4d1f87c91168f5d51a8c/dad97ef59d704ea0b66e4e5416c67f0a_new_logo_gep.png"
+                            class="" />
+                        </div>
+                    </div>
+                </div>
+                <div id="ilhu9k" *ngIf="userId!=null" class="cell gpd-clm">
+                    <div id="iw7pyc" class="gpd-text">
+                        <div id="template-i02d" class="">{{ UserName }}</div>
+                    </div>
+                    <label for="fileInput" id="template-iupy" class="hoverable">
+                        <img id="jn87dj" [src]="url ? url : images" type="file" class="" />
+                    </label>
+                    <input id="fileInput" type="file" (change)="onSelectFile($event)" accept="image/png, image/gif, image/jpeg"
+                    class="" />
+                </div>
+                <div id="mySidenav" class="sidenav">
+<a [routerLink]="['javascript:void(0)']" onclick="closeNav()" id="template-if7ki"
+                    class="closebtn">
+<div id="ibuiwl" class="cell gpd-clm">
+<img id="imvflv" src="https://cdn.grapedrop.com/uf9ef8595751c4d1f87c91168f5d51a8c/cdca723990474ba9ba33337d35ef399d_close.png" class=""/>
+</div>
+</a>
+
+                    <div id="MainMenu" class="">
+                        <div id="i0xya-2" class="cell gpd-clm">
+                            <div id="i60c7-2" class="gdp-row gpd-grid">
+                                <div id="ibuiwl" class="cell gpd-clm">
+                                    <img id="imvflv" />
+                                </div>
+                                <div id="icrvgp" class="cell gpd-clm" *ngIf='userId!=null'>
+                                    <div id="i6vd27" class="gdp-row gpd-grid" *ngIf='userId!=null'>
+                                        <div id="inlo1l" class="cell gpd-clm" *ngIf='userId!=null'> <i id="iyxitk" class="fa fa-home" aria-hidden="true"></i>
+
+                                        </div>
+                                        <div id="iytw4t" class="cell gpd-clm"> <a id="i9imej" class="gpd-text" *ngIf='userId!=null' [routerLink]="['/home']">{{'source.home' | i18next}}</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="icrvgp" class="cell gpd-clm" *ngIf='isAdminUser && userId!=null'>
+                                    <div id="i6vd27" class="gdp-row gpd-grid" *ngIf='isAdminUser && userId!=null'>
+                                        <div id="inlo1l" class="cell gpd-clm" *ngIf='isAdminUser && userId!=null'> <i id="iyxitk" class="fa fa-user" aria-hidden="true"></i>
+
+                                        </div>
+                                        <div id="iytw4t" class="cell gpd-clm" *ngIf='isAdminUser && userId!=null'> <a id="i9imej" class="gpd-text" [routerLink]="['/admin']">{{'source.admin'| i18next}}</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="icrvgp" class="cell gpd-clm" *ngIf='userId!=null'>
+                                    <div id="i6vd27" class="gdp-row gpd-grid" *ngIf='userId!=null'>
+                                        <div id="inlo1l" class="cell gpd-clm" *ngIf='userId!=null'> <i id="iyxitk" class="fa fa-sign-out" aria-hidden="true"></i>
+
+                                        </div>
+                                        <div id="iytw4t" class="cell gpd-clm"> <a id="i9imej" class="gpd-text" *ngIf='userId!=null' (click)="logout()">{{'source.logout' | i18next}}</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <li>
+                                    <div id="icrvgp" class="cell gpd-clm" *ngIf='userId==null'>
+                                        <div id="i6vd27" class="gdp-row gpd-grid" *ngIf='userId==null'>
+                                            <div id="inlo1l" class="cell gpd-clm" *ngIf='userId==null'> <i id="iyxitk" class="fa fa-sign-in" aria-hidden="true"></i>
+
+                                            </div>
+                                            <div id="iytw4t" class="cell gpd-clm"> <a id="i9imej" class="gpd-text" *ngIf='userId==null' [routerLink]="['/login']">{{'source.login' | i18next}}</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div id="icrvgp" class="cell gpd-clm" *ngIf='userId!=null'>
+                                    <div id="i6vd27" class="gdp-row gpd-grid" *ngIf='userId!=null'>
+                                        <div id="inlo1l" class="cell gpd-clm" *ngIf='userId!=null'> <i id="iyxitk" class="fa fa-desktop" aria-hidden="true"></i>
+
+                                        </div>
+                                        <div id="iytw4t" class="cell gpd-clm"> <a id="i9imej" class="gpd-text" *ngIf='userId!=null' [routerLink]="['/sefscreen']">{{'source.sefscreen' | i18next}}</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <li>
+                                    <div id="icrvgp" class="cell gpd-clm">
+                                        <div id="i6vd27" class="gdp-row gpd-grid">
+                                            <div id="inlo1l" class="cell gpd-clm"> <i id="iyxitk" class="fa fa-language" aria-hidden="true"></i>
+
+                                            </div>
+                                            <div id="iytw4t" class="cell gpd-clm"> <a href="#translator" data-toggle="collapse" aria-expanded="false" id="i9imej"
+                                                class="dropdown-toggle text">
+                                                {{'source.selectLanguage' | i18next }} </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="collapse list-unstyled" id="translator">
+                                        <li *ngFor="let lang of languages">
+                                            <div id="icrvgp" class="cell gpd-clm">
+                                                <div id="i6vd27" class="gdp-row gpd-grid">
+                                                    <div id="iytw4t" class="cell gpd-clm"> <a id="i9imej" class="text" (click)='confirmLangModel(lang)'> {{'languages.' + lang | i18nextCap}}</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'top': '100px','display': confirmLangChangeModal}">
+    <div class="modal-dialog modal-sm" role="dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>language change cause you to re-login</p>
+            </div>
+            <div class="modal-footer" style="padding: 5px">
+                <button type="button" (click)="confirmLangChange()" class="btn btn-default">Confirm</button>
+                <button type="button" (click)="onCloseHandled()" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

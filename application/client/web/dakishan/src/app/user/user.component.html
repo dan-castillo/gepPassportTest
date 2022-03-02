@@ -1,0 +1,77 @@
+<div class="top_align">
+    <ag-grid-angular #agGrid id="myGrid" class="ag-theme-balham table_align" [columnDefs]="columnDefs" [rowData]="rowData" [defaultColDef]="defaultColDef" [animateRows]="true" (gridReady)="onGridReady($event)" domLayout='autoHeight' [frameworkComponents]="frameworkComponents"></ag-grid-angular>
+</div>
+<div class="profileform">
+    <form [formGroup]="signupform">
+        <div formGroupName="signupdata">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label"><strong>First Name</strong></label>
+                        <input type="text" class="form-control" placeholder="Firstname" formControlName="firstname" name="firstname">
+                        <span *ngIf="!signupform.get('signupdata.firstname').valid && signupform.get('signupdata.firstname').touched || !signupform.get('signupdata.firstname').valid && submit" class="invalid-feedback">
+                  Must be a valid First Name
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label"><strong>Last Name</strong></label>
+                        <input type="text" class="form-control" placeholder="Lastname" formControlName="lastname" name="lastname">
+                        <span *ngIf="!signupform.get('signupdata.lastname').valid && signupform.get('signupdata.lastname').touched || !signupform.get('signupdata.lastname').valid && submit" class="invalid-feedback">
+                  Must be a valid Last Name
+                </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label"><strong>User Name</strong></label>
+                        <input type="text" class="form-control" [disabled]="true" placeholder="Username" name="username">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label"><strong>Password</strong></label>
+                        <input type="text" class="form-control" formControlName="password" placeholder="Password" name="password">
+                        <span *ngIf="!signupform.get('signupdata.password').valid && signupform.get('signupdata.password').touched || !signupform.get('signupdata.password').valid && submit" class="invalid-feedback">
+                  A Password must be 8 character and must have a Uppercase , Lowercase and a Special character
+                </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label"><strong>Email</strong></label>
+                        <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email">
+                        <span *ngIf="!signupform.get('signupdata.email').valid && signupform.get('signupdata.email').touched || !signupform.get('signupdata.email').valid && submit" class="invalid-feedback">
+                  Must be a valid Email Id
+                </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label"><strong>Profile Pic</strong></label>
+                        <input type="image" class="form-control" multiple (change)="onFileSelected($event)" type="file" name="avatar" accept="image/png, image/gif, image/jpeg" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-sm-6">
+                    <!-- <div class="form-group">
+                        <label class="label"><strong>Role</strong></label>
+                        <select class="form-select" (change)="onChange($event.target.value)">
+                <option value="" selected>Select Roles</option>
+                <option *ngFor="let rolevalue of roles">{{rolevalue.role}}</option>
+                </select>
+                    </div> -->
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary" (click)="adduser()">submit</button>&nbsp;&nbsp;
+
+                    <!-- <button type="submit" class="btn btn-primary" (click)="cancle()">cancel</button>  -->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

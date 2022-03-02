@@ -1,0 +1,253 @@
+version: "3.8"
+services:
+  mongo:
+    image: geppettotest/mongo-local:sept2021
+    container_name: mongo-6338
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - dakishan_6338-volume:/data/db
+    ports:
+      - "27018:27017"
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo admin -u root -p root --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+  vault:
+    image: vault
+    container_name: vault-6338
+    ports:
+      - "8200:8200"
+    environment:
+        VAULT_SERVER: "http://127.0.0.1:8200"
+        VAULT_DEV_ROOT_TOKEN_ID: vault-geppetto-2021
+    cap_add:
+      - IPC_LOCK
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  camunda:
+    image: geppettodistribution/camunda-local:Jan2021
+    container_name: camunda-6338
+    ports:
+      - "0000:8080"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  authproxy:
+    build: ../../../application/services/default_services/authproxy
+    image: authproxy-6338
+    container_name: authproxy-6338
+    ports:
+      - "0000:8001"
+    env_file: .env
+    depends_on:
+      - mongo
+      - gcam
+      - camunda
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  securitymanager:
+    build: ../../../application/services/default_services/securitymanager
+    image: securitymanager-6338
+    container_name: securitymanager-6338
+    ports:
+      - "8003:8003"
+    env_file: .env
+    depends_on:
+      - mongo
+      - camunda
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  systemcredentialmanager:
+    build: ../../../application/services/default_services/systemcredentialmanager
+    image: systemcredentialmanager-6338
+    container_name: systemcredentialmanager-6338
+    ports:
+      - "8005:8005"
+    env_file: .env
+    depends_on:
+      - mongo
+      - vault
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  camundaservice:
+    build: ../../../application/services/default_services/camunda
+    image: camundaservice-6338
+    container_name: camundasvc-6338
+    ports:
+      - "8002:8002"
+    env_file: .env
+    depends_on:
+      - mongo
+      - camunda
+      - securitymanager
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  gepfilemanager:
+    build: ../../../application/services/default_services/gepfilemanager
+    image: gepfilemanager-6338
+    container_name: gepfilemanager-6338
+    ports:
+      - "3015:3015"
+    env_file: .env
+    depends_on:
+      - mongo
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  gcam:
+    build: ../../../application/services/default_services/gcam
+    image: gcam-6338
+    container_name: gcam-6338
+    ports:
+      - "8007:8007"
+    env_file: .env
+    depends_on:
+      - mongo
+      - vault
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+     
+     
+  apigateway:
+    build: ../../../application/services/custom_services/apigateway
+    image: apigateway-6338
+    container_name: apigateway-6338
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      - camunda
+      - camundaservice
+      - authproxy
+      - securitymanager
+      - systemcredentialmanager
+      - systementry
+
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+  elasticsearch:
+    image: elasticsearch:7.16.2
+    container_name: elasticsearch-6338
+    restart: always
+    environment:
+      - cluster.name=elasticsearch
+      - node.name=elasticsearch
+      - discovery.seed_hosts=elasticsearch
+      - cluster.initial_master_nodes=elasticsearch
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 262144 # maximum number of open files for the Elasticsearch user, set to at least 65536 on modern systems
+        hard: 262144
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    expose:
+      - 9200
+    ports:
+      - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
+
+  kibana:
+    image: kibana:7.16.2
+    container_name: kibana-6338
+    restart: always
+    ports:
+      - 5601:5601
+    expose:
+      - "5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+
+  fluentd:
+    image: fluentd-6338
+    build: ../../../application/services/default_services/fluentd/fluend
+    volumes:
+      - ../../../application/services/default_services/fluentd/conf:/fluentd/etc
+    links:
+      - "elasticsearch"
+    restart: always
+    container_name: fluentd-6338
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+
+
+  systementry: 
+    build: ../../../application/services/custom_services/systementry
+    image: systementry-6338
+    container_name: systementry-6338
+    ports: 
+      - 8010:8010
+    env_file: .env
+    depends_on:
+      - mongo
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 0.0.0.0:24224
+        fluentd-async-connect: "true"
+        tag: fluent
+
+
+volumes:
+  dakishan_6338-volume:
+    driver: local
+  elasticsearch:
